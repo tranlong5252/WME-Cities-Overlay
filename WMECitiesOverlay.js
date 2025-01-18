@@ -37,12 +37,14 @@
     var defaultFillOpacity = 0.3;
     var defaultStrokeOpacity = 0.6;
     var noFillStrokeOpacity = 0.9;
-    var repoOwner = 'WazeDev';
+    var repoOwner = 'tranlong5252';
+    var repoBranch = 'long/vietnam';
 
     let currState = "";
     let currCity = "";
     let _US_States = {};
     let _MX_States = {};
+    let _VM_States = {};
     let kmlCache = {};
 
     let indexedDBSupport = false;
@@ -185,6 +187,8 @@
             countryAbbrObj = _US_States;
         else if(countryAbbr === "MX")
             countryAbbrObj = _MX_States;
+        else if(countryAbbr === "VM")
+            countryAbbrObj = _VM_States;
 
         let KMLinfoArr = await fetch(`https://api.github.com/repos/WazeDev/WME-Cities-Overlay/contents/KMLs/${countryAbbr}`);
         KMLinfoArr = $.parseJSON(KMLinfoArr);
@@ -275,7 +279,13 @@
             getStateFromAbbr: function(abbr) { return Object.entries(_MX_States).filter(x => {if(x[1] == abbr) return x})[0][0];},
             getStatesArray: function() { return Object.keys(_MX_States).filter(x => {if(typeof _MX_States[x] !== "function") return x;});},
             getStateAbbrArray: function() { return Object.values(_MX_States).filter(x => {if(typeof x !== "function") return x;});}};
-
+        _VM_States = { 
+            '': "VM",
+            getAbbreviation: function(state) { return this[state];},
+            getStateFromAbbr: function(abbr) { return Object.entries(_MX_States).filter(x => {if(x[1] == abbr) return x})[0][0];},
+            getStatesArray: function() { return Object.keys(_MX_States).filter(x => {if(typeof _MX_States[x] !== "function") return x;});},
+            getStateAbbrArray: function() { return Object.values(_MX_States).filter(x => {if(typeof x !== "function") return x;});}};
+        }
         loadSettings();
 
         var layerid = 'wme_cities_overlay';
@@ -448,6 +458,8 @@
                 stateAbbr = _US_States.getAbbreviation(currState);
             else if(countryAbbr === "MX")
                 stateAbbr = _MX_States.getAbbreviation(currState);
+            else if(countryAbbr === "VM")
+                stateAbbr = _VM_States.getAbbreviation(currState);
 
             if(typeof stateAbbr !== "undefined"){
                 if(typeof kmlCache[stateAbbr] == 'undefined'){
@@ -456,7 +468,7 @@
 
                     //if the store didn't have the state, look it up from github and enter it in the store
                     if(!request){
-                        let kml = await fetch(`https://raw.githubusercontent.com/${repoOwner}/WME-Cities-Overlay/master/KMLs/${countryAbbr}/${stateAbbr}_Cities.kml`);
+                        let kml = await fetch(`https://raw.githubusercontent.com/${repoOwner}/WME-Cities-Overlay/${repoBranch}/KMLs/${countryAbbr}/${stateAbbr}_Cities.kml`);
                         _kml = kml;
                         updatePolygons();
 
