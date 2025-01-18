@@ -190,7 +190,7 @@
         else if(countryAbbr === "VM")
             countryAbbrObj = _VM_States;
 
-        let KMLinfoArr = await fetch(`https://api.github.com/repos/WazeDev/WME-Cities-Overlay/contents/KMLs/${countryAbbr}`);
+        let KMLinfoArr = await fetch(`https://api.github.com/repos/tranlong5252/WME-Cities-Overlay/contents/KMLs/${countryAbbr}?ref=long/vietnam`);
         KMLinfoArr = $.parseJSON(KMLinfoArr);
         let state;
         for(let i=0; i<keys.length; i++){
