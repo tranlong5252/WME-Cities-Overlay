@@ -6,7 +6,7 @@
 // @author       WazeDev
 // @include      /^https:\/\/(www|beta)\.waze\.com\/(?!user\/)(.{2,6}\/)?editor\/?.*$/
 // @require      https://greasyfork.org/scripts/24851-wazewrap/code/WazeWrap.js
-// @require      https://greasyfork.org/scripts/369729-wme-cities-overlay-db/code/WME%20Cities%20Overlay%20DB.js
+// @require      https://greasyfork.org/scripts/524087-wme-cities-overlay-db/code/WME%20Cities%20Overlay%20DB.js
 // @license      GNU GPLv3
 // @grant        GM_xmlhttpRequest
 // @connect      api.github.com
@@ -38,7 +38,7 @@
     var defaultStrokeOpacity = 0.6;
     var noFillStrokeOpacity = 0.9;
     var repoOwner = 'tranlong5252';
-    var repoBranch = 'long/vietnam';
+    var repoBranch = '/refs/heads/long/vietnam';
 
     let currState = "";
     let currCity = "";
@@ -201,7 +201,7 @@
                     let stateObj = await idbKeyval.get(`${countryAbbr}_states_cities`, state);
 
                     if(stateObj.kmlsize !== KMLinfoArr[j].size){
-                        let kml = await fetch(`https://raw.githubusercontent.com/${repoOwner}/WME-Cities-Overlay/{}/KMLs/${countryAbbr}/${state}_Cities.kml`);
+                        let kml = await fetch(`https://raw.githubusercontent.com/${repoOwner}/WME-Cities-Overlay//${repoBranch}/KMLs/${countryAbbr}/${state}_Cities.kml`);
 
                         if(state === countryAbbrObj.getAbbreviation(currState))
                             _kml = kml;
