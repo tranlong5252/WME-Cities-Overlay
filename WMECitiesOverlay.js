@@ -38,7 +38,7 @@
     var defaultStrokeOpacity = 0.6;
     var noFillStrokeOpacity = 0.9;
     var repoOwner = 'tranlong5252';
-    var repoBranch = 'long/vietnam';
+    var repoBranch = '/refs/heads/long/vietnam';
 
     let currState = "";
     let currCity = "";
