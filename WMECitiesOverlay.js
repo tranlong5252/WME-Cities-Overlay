@@ -38,7 +38,7 @@
     var defaultStrokeOpacity = 0.6;
     var noFillStrokeOpacity = 0.9;
     var repoOwner = 'tranlong5252';
-    var repoBranch = '/refs/heads/long/vietnam';
+    var repoBranch = 'long/vietnam';
 
     let currState = "";
     let currCity = "";
@@ -201,7 +201,7 @@
                     let stateObj = await idbKeyval.get(`${countryAbbr}_states_cities`, state);
 
                     if(stateObj.kmlsize !== KMLinfoArr[j].size){
-                        let kml = await fetch(`https://raw.githubusercontent.com/${repoOwner}/WME-Cities-Overlay/${repoBranch}/KMLs/${countryAbbr}/${state}_Cities.kml`);
+                        let kml = await fetch(`https://raw.githubusercontent.com/${repoOwner}/WME-Cities-Overlay/{}/KMLs/${countryAbbr}/${state}_Cities.kml`);
 
                         if(state === countryAbbrObj.getAbbreviation(currState))
                             _kml = kml;
@@ -285,7 +285,6 @@
             getStateFromAbbr: function(abbr) { return Object.entries(_MX_States).filter(x => {if(x[1] == abbr) return x})[0][0];},
             getStatesArray: function() { return Object.keys(_MX_States).filter(x => {if(typeof _MX_States[x] !== "function") return x;});},
             getStateAbbrArray: function() { return Object.values(_MX_States).filter(x => {if(typeof x !== "function") return x;});}};
-        }
         loadSettings();
 
         var layerid = 'wme_cities_overlay';
