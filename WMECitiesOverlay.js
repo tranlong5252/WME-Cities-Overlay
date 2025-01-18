@@ -201,7 +201,7 @@
                     let stateObj = await idbKeyval.get(`${countryAbbr}_states_cities`, state);
 
                     if(stateObj.kmlsize !== KMLinfoArr[j].size){
-                        let kml = await fetch(`https://raw.githubusercontent.com/${repoOwner}/WME-Cities-Overlay/master/KMLs/${countryAbbr}/${state}_Cities.kml`);
+                        let kml = await fetch(`https://raw.githubusercontent.com/${repoOwner}/WME-Cities-Overlay/${repoBranch}/KMLs/${countryAbbr}/${state}_Cities.kml`);
 
                         if(state === countryAbbrObj.getAbbreviation(currState))
                             _kml = kml;
